@@ -11,3 +11,11 @@
 - the default is <b>1</b>, so if you just execute the program as:
 - <i><b> python crop_faces_from_image.py</b></i>
 - the cropped faces in the output directory will start from number <b>1</b> </br>
+
+# how to use crop_faces_from_images.ipynb
+- No need to execute in terminal or cmd prompt
+- Error Handled  
+    *  AttributeError, SystemError, OSError etc
+    * .HEIC file sometimes return 'None' when applying cv.imread function
+        * handled if None Type occur, do not proceed to next line
+- file name starts from 'face1' and number increases one by one 'face2', 'face3', ...
