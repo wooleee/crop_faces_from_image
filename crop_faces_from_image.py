@@ -18,8 +18,10 @@ import face_recognition
 import pickle
 
 # construct the argument parser and parse the arguments
-INPUT = 'input' # directory containing images that have faces
-OUTPUT = 'output' # directory of cropped faces
+INPUT = '/Users/woolee/mldl_project/github/crop_faces_from_image/input_wm'
+OUTPUT = '/Users/woolee/mldl_project/github/crop_faces_from_image/output_wm'
+#INPUT = 'input' # directory containing images that have faces
+#OUTPUT = 'output' # directory of cropped faces
 MODEL = 'face_detector'
 CONFIDENCE = 0.5
 
@@ -37,6 +39,9 @@ n = vars(ap.parse_args())['number']
 for file in os.listdir(INPUT):
     # load the input image and grab the image spatial dimensions
     image = cv2.imread(f'{INPUT}/{file}')
+    
+    # wc - error pass
+    #while (image is not None):
     (h, w) = image.shape[:2]
 
     # construct a blob from the image
@@ -60,9 +65,20 @@ for file in os.listdir(INPUT):
             # ensure the bounding boxes fall within the dimensions of the frame
             (startX, startY) = (max(0, startX), max(0, startY))
             (endX, endY) = (min(w - 1, endX), min(h - 1, endY))
-
+                            
+            # wc - error pass
             face = Image.open(f'{INPUT}/{file}').crop((startX, startY, endX, endY))
-            face.save(f'{OUTPUT}/face{n}.jpg')
+            try:
+                face.save(f'{OUTPUT}/face{n}.jpg')
+            except SystemError:
+                pass
+            except OSError:
+                pass
+
+
+
+                            #face = Image.open(f'{INPUT}/{file}').crop((startX, startY, endX, endY))
+                            #face.save(f'{OUTPUT}/face{n}.jpg')
     
     # add 1 to n
     n += 1
